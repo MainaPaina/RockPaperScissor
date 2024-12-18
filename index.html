@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors - Game</title>
+    <link href="./css/style.css" rel="stylesheet">
+    <script src="./js/script.js" defer></script>
+    <link rel="shortcut icon" href="./img/rock-paper-scissors.png" type="image/png">
+</head>
+<body>
+    <h1>Rock Paper Scissor</h1>
+    <p>Can you beat the computer in this simple Rock-Paper-Scissor duel?</p>
+    <p>Rock beats scissor, scissor beats paper and paper beats rock</p>
+    <p>Press "F5" to start over</p>
+    <div id="game">
+        <div class="players">
+            <p id="stats"></p>
+        </div>
+        <div class="players">
+            <div class="playerJuan" id="playerJuan">
+                <h4>PLAYER JUAN</h4>
+                <img src="./img/confused.png" alt="Player Juan">
+                <img src="" alt="User Choice" id="userChoice" style="display: none;">   <!-- Open space for pictures -->
+            </div>           <!-- not a typo, he is a dick -->
+            <div class="playerBot" id="playerDickBot">
+                <h4>PLAYER BOT</h4>
+                <img src="" alt="Bot Choice" id="pickBotChoice" style="display: none;">   <!-- Open space for pictures -->
+                <img src="./img/gaming.png" alt="Player Bot">
+            </div>
+        </div>
+
+        <div class="buttons" id="buttons">
+            <button class="choiceButtons" id="buttonRock" onclick="userPick('rock');">Rock</button>
+            <button class="choiceButtons" id="buttonPaper" onclick="userPick('paper');">Paper</button>
+            <button class="choiceButtons" id="buttonScissor" onclick="userPick('scissor');">Scissor</button>
+        </div>
+    </div>
+</body>
+</html>

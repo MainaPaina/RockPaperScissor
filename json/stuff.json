@@ -1,0 +1,38 @@
+{
+  "players": [
+    {
+      "name": "Juanita",
+      "chanceOfStone": 90,
+      "chanceOfScissors": 100,
+      "chanceOfPaper": 80,
+      "scoreTarget": 6
+    },
+    {
+      "name": "Karen",
+      "chanceOfStone": 99,
+      "chanceOfScissors": 64,
+      "chanceOfPaper": 12,
+      "scoreTarget": 19
+    },
+    {
+      "name": "Håkon",
+      "chanceOfStone": 43,
+      "chanceOfScissors": 75,
+      "chanceOfPaper": 87,
+      "scoreTarget": 40
+    }
+  ],
+  "tools": [
+    {
+      "name": "rock",
+      "weakness": "paper,shovel",
+      "super": "super-rock",
+      "superPercentage": 7,
+      "toolType": "basic"
+    },
+    {
+      "name": "paper",
+      "weakness": "scissor,golden-scissor"
+    }
+  ]  
+}
