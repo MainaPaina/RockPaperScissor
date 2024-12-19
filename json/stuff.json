@@ -2,21 +2,21 @@
   "players": [
     {
       "name": "Juanita",
-      "chanceOfStone": 90,
+      "chanceOfRock": 90,
       "chanceOfScissors": 100,
       "chanceOfPaper": 80,
       "scoreTarget": 6
     },
     {
       "name": "Karen",
-      "chanceOfStone": 99,
+      "chanceOfRock": 99,
       "chanceOfScissors": 64,
       "chanceOfPaper": 12,
       "scoreTarget": 19
     },
     {
       "name": "Håkon",
-      "chanceOfStone": 43,
+      "chanceOfRock": 43,
       "chanceOfScissors": 75,
       "chanceOfPaper": 87,
       "scoreTarget": 40
@@ -25,14 +25,31 @@
   "tools": [
     {
       "name": "rock",
-      "weakness": "paper,shovel",
+      "weakness": "paper",
       "super": "super-rock",
-      "superPercentage": 7,
+      "superPercentage": 2,
       "toolType": "basic"
     },
     {
       "name": "paper",
-      "weakness": "scissor,golden-scissor"
+      "weakness": "scissors",
+      "super": "shiny-paper",
+      "superPercentage": 2,
+      "toolType": "basic"
+    },
+    {
+      "name": "scissors",
+      "weakness": "rock",
+      "super": "golden-scissors",
+      "superPercentage": 2,
+      "toolType": "basic"
+    },
+    {
+      "name": "smash",
+      "weakness": "none",
+      "super": "hulk-smash",
+      "superPercentage": 4,
+      "toolType": "op"
     }
   ]  
 }
