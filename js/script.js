@@ -89,7 +89,7 @@ function startGame() {
 
 function loadJSONData() {
     let xmlhttp = new XMLHttpRequest(); // navn på variabel er valgfritt, xhr eller request er vanlige navn, vi valgte å kalle den for xmlhttp
-    let url = "./json/stuff.json"; // lokale variabler, trenger ikke like godt gjennomtenkt navn
+    let url = "https://mainapaina.github.io/RockPaperScissor/json/stuff.json"; // lokale variabler, trenger ikke like godt gjennomtenkt navn
     
     xmlhttp.onreadystatechange = function() {
         // READYSTATE forklaring: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
