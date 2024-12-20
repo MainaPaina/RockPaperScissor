@@ -46,7 +46,7 @@ h1 {
 }
 h1#gameOver {
     position: relative;
-    top: -6rem;
+    top: -2rem;
 }
 h4 {
     font-size: 20px;
@@ -70,13 +70,13 @@ h4 {
     padding-left: 15px;
 }
 .playerJuan img:first-of-type, .playerBot img:last-of-type {
-    height: 150px;
-}
-.playerJuan img:last-of-type, .playerBot img:first-of-type {
     height: 100px;
 }
+.playerJuan img:last-of-type, .playerBot img:first-of-type {
+    height: 80px;
+}
 .playerJuan img:last-of-type, .playerBot img:last-of-type {
-    margin: 0px 0px 0px 50px;  
+    margin: 0px 0px 0px 8rem;  
 }
 
 .players .playerBot {

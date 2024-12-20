@@ -211,7 +211,7 @@ function winCheck(){
     /// Check if 
 
     if (playerScore >= playerCurrentSelected.scoreTarget || computerScore > playerCurrentSelected){
-        endGame();
+        setTimeout(endGame, 500);
 /* if lives > 0:
   proceed game
  else // lives <= 0
@@ -220,7 +220,7 @@ function winCheck(){
     }
 
     else {
-        cuntGame();
+        setTimeout(cuntGame, 500);
     }
 
 }
@@ -229,10 +229,12 @@ function endGame(){
     if (computerScore >= playerCurrentSelected.scoreTarget) {
         document.getElementById("buttons").style.display = "none";
         document.getElementById("gameOver").innerText = "GAME OVER";
+        document.getElementById("gameOver").style.color = "black";
     }
     else {
         document.getElementById("buttons").style.display = "none";
         document.getElementById("gameOver").innerText = "CONGRATULATIONS, YOU WIN!";
+        document.getElementById("gameOver").style.color = "green";
         renderWrappingConfetti();
     }
 }
@@ -254,38 +256,42 @@ function showButtons(){
     let randomNumber = Math.floor(Math.random() * 100);
     if (playerCurrentSelected.chanceOfRock > randomNumber) {
         document.getElementById("buttonRock").style.display = "";
-        document.getElementById("buttonRock").innerText = "Rock - " + randomNumber;
+        // document.getElementById("buttonRock").innerText = "Rock - " + randomNumber;
+        document.getElementById("buttonRock").innerText = "Rock";
         buttonsShown++;
     }
     else {
-        console.log("Rock, player - " + playerCurrentSelected.chanceOfRock + ", value - " + randomNumber);
+        // console.log("Rock, player - " + playerCurrentSelected.chanceOfRock + ", value - " + randomNumber);
     }
     randomNumber = Math.floor(Math.random() * 100);
     if (playerCurrentSelected.chanceOfScissors > randomNumber) {
         document.getElementById("buttonScissors").style.display = "";
-        document.getElementById("buttonScissors").innerText = "Scissors - " + randomNumber;
+        // document.getElementById("buttonScissors").innerText = "Scissors - " + randomNumber;
+        document.getElementById("buttonScissors").innerText = "Scissors";
         buttonsShown++;
     }
     else {
-        console.log("Scissors, player - " + playerCurrentSelected.chanceOfScissors + ", value - " + randomNumber);
+        // console.log("Scissors, player - " + playerCurrentSelected.chanceOfScissors + ", value - " + randomNumber);
     }
     randomNumber = Math.floor(Math.random() * 100);
     if (playerCurrentSelected.chanceOfPaper > randomNumber) {
         document.getElementById("buttonPaper").style.display = "";
-        document.getElementById("buttonPaper").innerText = "Paper - " + randomNumber;
+        // document.getElementById("buttonPaper").innerText = "Paper - " + randomNumber;
+        document.getElementById("buttonPaper").innerText = "Paper";
         buttonsShown++;
     }
     else {
-        console.log("Paper, player - " + playerCurrentSelected.chanceOfPaper + ", value - " + randomNumber);
+        // console.log("Paper, player - " + playerCurrentSelected.chanceOfPaper + ", value - " + randomNumber);
     }
     randomNumber = Math.floor(Math.random() * 100);
     if (playerCurrentSelected.chanceOfSmash > randomNumber) {
         document.getElementById("buttonSmash").style.display = "";
-        document.getElementById("buttonSmash").innerText = "Smash - " + randomNumber;
+        // document.getElementById("buttonSmash").innerText = "Smash - " + randomNumber;
+        document.getElementById("buttonSmash").innerText = "Smash";
         buttonsShown++;
     }
     else {
-        console.log("Smash, player - " + playerCurrentSelected.chanceOfSmash + ", value - " + randomNumber);
+        // console.log("Smash, player - " + playerCurrentSelected.chanceOfSmash + ", value - " + randomNumber);
     }
 
     if (buttonsShown == 0) {
