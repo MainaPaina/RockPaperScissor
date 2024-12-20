@@ -8,6 +8,7 @@ let playerList;
 ///      "chanceOfRock": 90,
 ///      "chanceOfScissors": 100,
 ///      "chanceOfPaper": 80,
+///      "chanceOfSmash": 6,
 ///      "scoreTarget": 6
 ///    }
 ///
@@ -15,12 +16,13 @@ const playerDefault = {
     "name": "Juan",
     "avatar": "./img/confused.png",
     "chanceOfRock": 100,
-    "chanceOfScissor": 100,
+    "chanceOfScissors": 100,
     "chanceOfPaper": 100,
+    "chanceOfSmash": 5,
     "scoreTarget": 6
 }
 /// Variable for holding current selected player
-let playerCurrentSelected;
+let playerCurrentSelected = playerDefault;
 /// Variable for holding history of choices from player
 let playerHistory;
 /// Variable for holding current choice from player
@@ -47,7 +49,7 @@ let computerDefault = {
     "name": "Pick Bot",
     "avatar": "./img/avtar/pickbot.png",
     "chanceOfStone": 100,
-    "chanceOfScissor": 100,
+    "chanceOfScissors": 100,
     "chanceOfPaper": 100,
     "algorithm": "random"
 }
@@ -65,15 +67,24 @@ let computerScore = 0;
 let gameCurrentRound = 0;
 /// Give rock, paper and scissor a value, to be picked in a random choice
 const gameChoiceRock = 1;
-const gameChoiceScissor = 2;
+const gameChoiceScissors = 2;
 const gameChoicePaper = 3;
-const gameChoiceSmack = 4;
+const gameChoiceSmash = 4;
 
 const backgroundColor = "rgb(173, 216, 230)";
 const activeColor = "rgb(141, 5, 239)";
 
 function startGame() {
-    
+
+    computerScore = 0;
+    playerScore = 0;
+    gameCurrentRound = 0;
+
+    hideButtons();
+    showButtons();
+
+    document.getElementById("buttons").style.display = "";
+    document.getElementById("gameOver").innerText = "";
 }
 
 function loadJSONData() {
@@ -91,7 +102,7 @@ function loadJSONData() {
             }
             else {
                 playerList = jsonData.players;
-                console.log(playerList);
+/*                 console.log(playerList); */
             }
 
             /* Alternativ test om verdi ikke er udefinert. 
@@ -115,7 +126,7 @@ function loadJSONData() {
             if (playerList == undefined && playerCurrentSelected == undefined) {
                 playerCurrentSelected = playerDefault;
             }
-            else if (playerList != undefined && playerCurrentSelected == undefined) {
+            else if (playerList != undefined) {
                 showPlayerSelection();
             }
 
@@ -130,26 +141,26 @@ function loadJSONData() {
 
 function showPlayerSelection() {
     let listDOM = document.getElementById("playerSelectionList");
-    let optionDOM = document.createElement("option");
-    optionDOM.selected = "selected";
-    optionDOM.disabled = "disabled";
-    optionDOM.innerText = "- Select player";
-    listDOM.appendChild(optionDOM);
+    let optionDOM;
     for (let i = 0; i < playerList.length; i++) {
         optionDOM = document.createElement("option");
+        if (playerList[i].name == playerCurrentSelected.name){
+            optionDOM.selected = "selected";
+        }
         optionDOM.setAttribute("data-id", i);
-        optionDOM.innerText = playerList[i].name;
+        optionDOM.innerText = playerList[i].name + " - First to " + playerList[i].scoreTarget;
         listDOM.appendChild(optionDOM);
     }
 
     listDOM.addEventListener("change", function() {
         let _selectedPlayer = listDOM.options[listDOM.selectedIndex];
         let selectedIdPlayer = _selectedPlayer.getAttribute("data-id");
-        console.log(playerList[selectedIdPlayer]);
+/*         console.log(playerList[selectedIdPlayer]); */
         document.getElementById("playerImage").src = playerList[selectedIdPlayer].avatar;
         playerCurrentSelected = playerList[selectedIdPlayer];
         document.getElementById("playerName").innerText = playerList[selectedIdPlayer].name;
     });
+
 }
 
 // funksjon for å lage nytt valg for maskinen
@@ -160,8 +171,8 @@ function pickBot(){
         case gameChoiceRock: 
             computerChoice = "rock";
             break;
-        case gameChoiceScissor:
-            computerChoice = "scissor";
+        case gameChoiceScissors:
+            computerChoice = "scissors";
             break;
         case gameChoicePaper:
             computerChoice = "paper";
@@ -177,9 +188,10 @@ function winCheck(){
 
     /// IF playerChoice beats computerChoice (VANILLA)
     /// add 1 to the player score 
-    if ((playerChoice == "scissor" && computerChoice == "paper") || 
-        (playerChoice == "rock" && computerChoice == "scissor") || 
-        (playerChoice == "paper" && computerChoice == "rock")) {
+    if ((playerChoice == "scissors" && computerChoice == "paper") || 
+        (playerChoice == "rock" && computerChoice == "scissors") || 
+        (playerChoice == "paper" && computerChoice == "rock") ||
+        (playerChoice == "smash")) {
         
         /// Add 1 to player score
         playerScore += 1;
@@ -198,7 +210,7 @@ function winCheck(){
 
     /// Check if 
 
-    if (playerScore > playerCurrentSelected.scoreTarget || computerScore > playerCurrentSelected){
+    if (playerScore >= playerCurrentSelected.scoreTarget || computerScore > playerCurrentSelected){
         endGame();
 /* if lives > 0:
   proceed game
@@ -214,7 +226,15 @@ function winCheck(){
 }
 
 function endGame(){
-    document.getElementById("buttons").innerHTML = "<H1>GAME OVER</H1>";
+    if (computerScore >= playerCurrentSelected.scoreTarget) {
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("gameOver").innerText = "GAME OVER";
+    }
+    else {
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("gameOver").innerText = "CONGRATULATIONS, YOU WIN!";
+        renderWrappingConfetti();
+    }
 }
 
 function cuntGame(){
@@ -224,14 +244,53 @@ function cuntGame(){
 
 function hideButtons(){
     document.getElementById("buttonRock").style.display = "none";
-    document.getElementById("buttonScissor").style.display = "none";
+    document.getElementById("buttonScissors").style.display = "none";
     document.getElementById("buttonPaper").style.display = "none";
+    document.getElementById("buttonSmash").style.display = "none";
 }
 
 function showButtons(){
-    document.getElementById("buttonRock").style.display = "";
-    document.getElementById("buttonScissor").style.display = "";
-    document.getElementById("buttonPaper").style.display = "";
+    let buttonsShown = 0;
+    let randomNumber = Math.floor(Math.random() * 100);
+    if (playerCurrentSelected.chanceOfRock > randomNumber) {
+        document.getElementById("buttonRock").style.display = "";
+        document.getElementById("buttonRock").innerText = "Rock - " + randomNumber;
+        buttonsShown++;
+    }
+    else {
+        console.log("Rock, player - " + playerCurrentSelected.chanceOfRock + ", value - " + randomNumber);
+    }
+    randomNumber = Math.floor(Math.random() * 100);
+    if (playerCurrentSelected.chanceOfScissors > randomNumber) {
+        document.getElementById("buttonScissors").style.display = "";
+        document.getElementById("buttonScissors").innerText = "Scissors - " + randomNumber;
+        buttonsShown++;
+    }
+    else {
+        console.log("Scissors, player - " + playerCurrentSelected.chanceOfScissors + ", value - " + randomNumber);
+    }
+    randomNumber = Math.floor(Math.random() * 100);
+    if (playerCurrentSelected.chanceOfPaper > randomNumber) {
+        document.getElementById("buttonPaper").style.display = "";
+        document.getElementById("buttonPaper").innerText = "Paper - " + randomNumber;
+        buttonsShown++;
+    }
+    else {
+        console.log("Paper, player - " + playerCurrentSelected.chanceOfPaper + ", value - " + randomNumber);
+    }
+    randomNumber = Math.floor(Math.random() * 100);
+    if (playerCurrentSelected.chanceOfSmash > randomNumber) {
+        document.getElementById("buttonSmash").style.display = "";
+        document.getElementById("buttonSmash").innerText = "Smash - " + randomNumber;
+        buttonsShown++;
+    }
+    else {
+        console.log("Smash, player - " + playerCurrentSelected.chanceOfSmash + ", value - " + randomNumber);
+    }
+
+    if (buttonsShown == 0) {
+        rollCriticalEndGame();
+    }
 }
 
 function userPick(choice){
@@ -254,9 +313,121 @@ function updateStatsTimer() {
     updateStats();
 }
 
+function rollCriticalEndGame() {
+    let h1 = document.getElementById("gameOver");
+    document.getElementById("buttonStartGame").disabled = "disabled";
+    setTimeout(function() { 
+        h1.innerText = "Critical Fail";
+        h1.style.color = "red";
+        setTimeout(function() {
+            h1.innerText = "There are no options available";
+            h1.style.color = "orange";
+            setTimeout(function() {
+                h1.innerText = "You failed!";
+                h1.style.color = "red";
+                setTimeout(function() {
+                    h1.innerText = "Start a new game to try again";
+                    h1.style.color = "orange";
+                    document.getElementById("buttonStartGame").disabled = "";
+                }, 1000);
+            }, 1000);
+        }, 1000)
+    }, 1000)
+}
+
+// COPIED FROM: https://snorre.io/blog/2024-07-19-javascript-canvas-confetti/
+
+  // For brevity I will only show a simplified example of the color function
+  // If you inspect my code I account for dark mode preference as my blog
+  // supports both light and dark mode
+  let colors = [
+    "#10b981",
+    "#7c3aed",
+    "#fbbf24",
+    "#ef4444",
+    "#3b82f6",
+    "#22c55e",
+    "#f97316",
+    "#ef4444",
+  ]
+
+function setupCanvas(id) {
+
+    const canvas = document.createElement("canvas");
+    canvas.setAttribute("id", id);
+    const ctx = canvas.getContext('2d');
+    // canvas.style.position = "absolute";
+    // canvas.style.top = "0px";
+    canvas.width = 1200;
+    canvas.height = 900;
+    document.body.appendChild(canvas)
+    return { canvas, ctx };
+  }
+  function renderWrappingConfetti() {
+    const { canvas, ctx } = setupCanvas('canvas-wrapping'); 
+    const timeDelta = 0.05;
+    const xAmplitude = 0.5;
+    const yAmplitude = 1;
+    const xVelocity = 2;
+    const yVelocity = 3;
+
+    let time = 0;
+    const confetti = []
+
+    for (let i = 0; i < 100; i++) {
+      const radius = Math.floor(Math.random() * 50) - 10
+      const tilt = Math.floor(Math.random() * 10) - 10
+      const xSpeed = Math.random() * xVelocity - xVelocity / 2
+      const ySpeed = Math.random() * yVelocity
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height - canvas.height;
+
+      confetti.push({
+        x,
+        y,
+        xSpeed,
+        ySpeed,
+        radius,
+        tilt,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        phaseOffset: i, // Randomness from position in list
+      })
+    }
+
+    function update() {
+      // Run for at most 10 seconds
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach((piece, i) => {
+        piece.y += (Math.cos(piece.phaseOffset + time) + 1) * yAmplitude + piece.ySpeed;
+        piece.x += Math.sin(piece.phaseOffset + time) * xAmplitude + piece.xSpeed;
+        // Wrap around the canvas
+        if (piece.x < 0) piece.x = canvas.width;
+        if (piece.x > canvas.width) piece.x = 0;
+        if (piece.y > canvas.height) piece.y = 0;
+        ctx.beginPath();
+        ctx.lineWidth = piece.radius / 2;
+        ctx.strokeStyle = piece.color;
+        ctx.moveTo(piece.x + piece.tilt + piece.radius / 4, piece.y);
+        ctx.lineTo(piece.x + piece.tilt, piece.y + piece.tilt + piece.radius / 4);
+        ctx.stroke();
+      })
+      time += timeDelta;
+      requestAnimationFrame(update);
+    }
+    update();
+    setTimeout(function() {
+        document.body.removeChild(canvas);
+    }, 10000);
+    //
+  }
+//renderWrappingConfetti();
+// END OF COPY
+
+
+
 loadJSONData();
 
-
+startGame();
 updateStatsTimer();
 pickBot();
 

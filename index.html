@@ -9,35 +9,39 @@
     <link rel="shortcut icon" href="./img/rock-paper-scissors.png" type="image/png">
 </head>
 <body>
-    <h1>Rock Paper Scissor</h1>
-    <p>Can you beat the computer in this simple Rock-Paper-Scissor duel?</p>
-    <p>Rock beats scissor, scissor beats paper and paper beats rock</p>
-    <p>Press "F5" to start over</p>
-    <div id="game">
-        <div class="players">
-            <p id="stats"></p>
-        </div>
-        <div class="players">
-            <div class="playerJuan" id="playerJuan">
-                <h4 id="playerName">PLAYER JUAN</h4>
-                <img src="./img/avatar/juan.png" id="playerImage" alt="Player Juan">
-                <img src="" alt="User Choice" id="userChoice" style="display: none;">   <!-- Open space for pictures -->
-            </div>           <!-- not a typo, he is a dick -->
-            <div class="playerBot" id="playerDickBot">
-                <h4>PLAYER BOT</h4>
-                <img src="" alt="Bot Choice" id="pickBotChoice" style="display: none;">   <!-- Open space for pictures -->
-                <img src="./img/avatar/pickbot.png" alt="Player Bot">
+        <h1>Rock Paper Scissor</h1>
+        <p>Can you beat the computer in this simple Rock-Paper-Scissor duel?</p>
+        <p>Rock beats scissor, scissor beats paper and paper beats rock</p>
+        <section id="playerselection">
+            <select id="playerSelectionList"></select> <button onclick="startGame()" id="buttonStartGame">Start Game</button>
+        </section>
+        <div id="game">
+            <div class="players">
+                <p id="stats"></p>
+            </div>
+            <div class="players">
+                <div class="playerJuan" id="playerJuan">
+                    <h4 id="playerName">PLAYER JUAN</h4>
+                    <img src="./img/avatar/juan.png" id="playerImage" alt="Player Juan">
+                    <img src="" alt="User Choice" id="userChoice" style="display: none;">   <!-- Open space for pictures -->
+                </div>           <!-- not a typo, he is a dick -->
+                <div class="playerBot" id="playerDickBot">
+                    <h4>PLAYER BOT</h4>
+                    <img src="" alt="Bot Choice" id="pickBotChoice" style="display: none;">   <!-- Open space for pictures -->
+                    <img src="./img/avatar/pickbot.png" alt="Player Bot">
+                </div>
+            </div>
+
+            <div class="buttons" id="buttons">
+                <button class="choiceButtons" id="buttonRock" onclick="userPick('rock');">Rock</button>
+                <button class="choiceButtons" id="buttonPaper" onclick="userPick('paper');">Paper</button>
+                <button class="choiceButtons" id="buttonScissors" onclick="userPick('scissors');">Scissors</button>
+                <button class="choiceButtons" id="buttonSmash" onclick="userPick('smash');">Smash</button>
             </div>
         </div>
+        
+        <h1 id="gameOver"></h1>
 
-        <div class="buttons" id="buttons">
-            <button class="choiceButtons" id="buttonRock" onclick="userPick('rock');">Rock</button>
-            <button class="choiceButtons" id="buttonPaper" onclick="userPick('paper');">Paper</button>
-            <button class="choiceButtons" id="buttonScissor" onclick="userPick('scissor');">Scissor</button>
-        </div>
-    </div>
-    <section id="playerselection">
-        <select id="playerSelectionList"></select>
-    </section>
+        
 </body>
 </html>

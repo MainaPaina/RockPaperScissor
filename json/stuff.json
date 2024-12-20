@@ -1,11 +1,21 @@
 {
   "players": [
     {
+      "name": "Juan",
+      "avatar": "./img/avatar/juan.png",
+      "chanceOfRock": 100,
+      "chanceOfScissor": 100,
+      "chanceOfPaper": 100,
+      "chanceOfSmash": 5,
+      "scoreTarget": 6
+    },
+    {
       "name": "Juanita",
       "avatar": "./img/avatar/girl.png",
       "chanceOfRock": 90,
       "chanceOfScissors": 100,
       "chanceOfPaper": 80,
+      "chanceOfSmash": 6,
       "scoreTarget": 6
     },
     {
@@ -14,7 +24,17 @@
       "chanceOfRock": 99,
       "chanceOfScissors": 64,
       "chanceOfPaper": 12,
+      "chanceOfSmash": 15,
       "scoreTarget": 19
+    },
+    {
+      "name": "Harisha",
+      "avatar": "./img/avatar/harisha.png",
+      "chanceOfRock": 98,
+      "chanceOfScissors": 87,
+      "chanceOfPaper": 93,
+      "chanceOfSmash": 20,
+      "scoreTarget": 7
     },
     {
       "name": "Haakon",
@@ -22,6 +42,7 @@
       "chanceOfRock": 43,
       "chanceOfScissors": 75,
       "chanceOfPaper": 87,
+      "chanceOfSmash": 2,
       "scoreTarget": 40
     }
   ],

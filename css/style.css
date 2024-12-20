@@ -1,9 +1,30 @@
 .choiceButtons {
     background: rgb(173, 216, 230);
-    
     border-radius: 0.5rem;
     padding: 2rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#buttonStartGame {
+    background: rgb(108, 255, 177);
+    width: 12rem;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    z-index: 200;
+    position: relative;
+}
+#playerSelectionList {
+    position: relative;
+    background: rgb(173, 216, 230);
+    font-weight: bold;
+    width: 13rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    z-index: 200;
 }
 
 * {
@@ -21,6 +42,11 @@ body{
 h1 {
     font-size: 50px;
     font-weight: bolder;
+    
+}
+h1#gameOver {
+    position: relative;
+    top: -6rem;
 }
 h4 {
     font-size: 20px;
@@ -71,10 +97,18 @@ h4 {
     margin-right: 10px;
     font-weight: bolder;
     font-size: 16px;
-    width: 140px;
+    width: 15rem;
     height: 90px;
 }
 
-#game {
-    /* display: none; */
+/* #game {
+    display: none;
+} */
+canvas#canvas-wrapping {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    left: 0px;
+    height: 100%;
+    z-index: 100;
 }
