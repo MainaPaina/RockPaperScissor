@@ -19,14 +19,14 @@
         </div>
         <div class="players">
             <div class="playerJuan" id="playerJuan">
-                <h4>PLAYER JUAN</h4>
-                <img src="./img/confused.png" alt="Player Juan">
+                <h4 id="playerName">PLAYER JUAN</h4>
+                <img src="./img/avatar/juan.png" id="playerImage" alt="Player Juan">
                 <img src="" alt="User Choice" id="userChoice" style="display: none;">   <!-- Open space for pictures -->
             </div>           <!-- not a typo, he is a dick -->
             <div class="playerBot" id="playerDickBot">
                 <h4>PLAYER BOT</h4>
                 <img src="" alt="Bot Choice" id="pickBotChoice" style="display: none;">   <!-- Open space for pictures -->
-                <img src="./img/gaming.png" alt="Player Bot">
+                <img src="./img/avatar/pickbot.png" alt="Player Bot">
             </div>
         </div>
 
@@ -36,5 +36,8 @@
             <button class="choiceButtons" id="buttonScissor" onclick="userPick('scissor');">Scissor</button>
         </div>
     </div>
+    <section id="playerselection">
+        <select id="playerSelectionList"></select>
+    </section>
 </body>
 </html>

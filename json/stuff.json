@@ -2,6 +2,7 @@
   "players": [
     {
       "name": "Juanita",
+      "avatar": "./img/avatar/girl.png",
       "chanceOfRock": 90,
       "chanceOfScissors": 100,
       "chanceOfPaper": 80,
@@ -9,13 +10,15 @@
     },
     {
       "name": "Karen",
+      "avatar": "./img/avatar/woman.png",
       "chanceOfRock": 99,
       "chanceOfScissors": 64,
       "chanceOfPaper": 12,
       "scoreTarget": 19
     },
     {
-      "name": "Håkon",
+      "name": "Haakon",
+      "avatar": "./img/avatar/hacker.png",
       "chanceOfRock": 43,
       "chanceOfScissors": 75,
       "chanceOfPaper": 87,
@@ -25,6 +28,7 @@
   "tools": [
     {
       "name": "rock",
+      
       "weakness": "paper",
       "super": "super-rock",
       "superPercentage": 2,
